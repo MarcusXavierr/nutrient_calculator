@@ -65,7 +65,12 @@ class _HomePageState extends State<HomePage> {
                   child: Padding(
                     padding: EdgeInsets.only(top: 20.0),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
+                        FoodTracker(),
+                        FoodTracker(),
+                        FoodTracker(),
+                        FoodTracker(),
                         FoodTracker(),
                         FoodTracker(),
                         FoodTracker(),
@@ -96,23 +101,36 @@ class FoodTracker extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
       child: Row(
         children: <Widget>[
-          RoundIconButton(
-            icon: Icons.add,
-            onPressed: () {},
+          Row(
+            children: <Widget>[
+              RoundIconButton(
+                icon: Icons.add,
+                onPressed: () {},
+              ),
+              SizedBox(width: 7.0),
+              RoundIconButton(
+                icon: Icons.remove,
+                onPressed: () {},
+              ),
+              SizedBox(width: 10.0),
+              Text(
+                '5',
+                style: TextStyle(
+                  color: Colors.blueGrey.shade700,
+                  fontSize: 20,
+                ),
+              ),
+              SizedBox(width: 10),
+            ],
           ),
-          SizedBox(width: 7.0),
-          RoundIconButton(
-            icon: Icons.remove,
-            onPressed: () {},
-          ),
-          SizedBox(width: 10.0),
-          Text(
-            'Osdfjnsdfjsdkfjskldfjskldfjslkdfjlksdfjlskjflksjdflksjflksjdfvo',
-            style: TextStyle(
-              fontSize: 16,
+          Expanded(
+            child: Text(
+              'Comida',
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
-          Text('5'),
         ],
       ),
     );
