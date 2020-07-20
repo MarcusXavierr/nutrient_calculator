@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:nutrients/components/carousel_content.dart';
+import 'package:nutrients/components/food_tracker.dart';
 
 import '../constants.dart';
 
@@ -86,77 +87,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class FoodTracker extends StatelessWidget {
-  const FoodTracker({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-      child: Row(
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              RoundIconButton(
-                icon: Icons.add,
-                onPressed: () {},
-              ),
-              SizedBox(width: 7.0),
-              RoundIconButton(
-                icon: Icons.remove,
-                onPressed: () {},
-              ),
-              SizedBox(width: 10.0),
-              Text(
-                '5',
-                style: TextStyle(
-                  color: Colors.blueGrey.shade700,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(width: 10),
-            ],
-          ),
-          Expanded(
-            child: Text(
-              'Comida',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({this.icon, this.onPressed});
-
-  final Function onPressed;
-  final IconData icon;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(
-        icon,
-        color: Colors.white,
-      ),
-      onPressed: onPressed,
-      elevation: 5.0,
-      constraints: BoxConstraints.tightFor(
-        width: 47.0,
-        height: 47.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: kPrimaryColor,
     );
   }
 }
