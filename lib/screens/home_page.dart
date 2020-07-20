@@ -68,16 +68,22 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
-                        FoodTracker(),
+                        FoodTracker(
+                          counter: 3,
+                          foodName: 'Ovo',
+                        ),
+                        FoodTracker(
+                          counter: 1,
+                          foodName: 'Peito de frango',
+                        ),
+                        FoodTracker(
+                          counter: 2,
+                          foodName: 'Bife de carne bovina',
+                        ),
+                        FoodTracker(
+                          counter: 4,
+                          foodName: 'Colher de sopa de arroz integral',
+                        ),
                       ],
                     ),
                   ),
