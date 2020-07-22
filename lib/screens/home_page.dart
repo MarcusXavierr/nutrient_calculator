@@ -3,8 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:nutrients/components/carousel_content.dart';
 import 'package:nutrients/components/food_tracker.dart';
 
-import '../constants.dart';
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -29,10 +27,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kPrimaryColor,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text('Calculadora de nutrientes'),
       ),
