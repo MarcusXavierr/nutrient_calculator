@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nutrients/constants.dart';
 
 class RoundIconButton extends StatelessWidget {
   RoundIconButton({this.icon, this.onPressed});
@@ -20,7 +19,7 @@ class RoundIconButton extends StatelessWidget {
         height: 47.0,
       ),
       shape: CircleBorder(),
-      fillColor: kPrimaryColor,
+      fillColor: Theme.of(context).primaryColor,
     );
   }
 }
