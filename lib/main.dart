@@ -9,6 +9,7 @@ void main() {
       primaryColor: Colors.purple.shade900,
       accentColor: Colors.blueGrey.shade700,
     ),
+    debugShowCheckedModeBanner: false,
     home: HomePage(),
   ));
 }
