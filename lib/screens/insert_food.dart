@@ -54,6 +54,7 @@ class _InsertFoodState extends State<InsertFood> {
                       padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 20.0),
                       child: Column(
                         children: <Widget>[
+                          //TODO: Refatorar o codigo para tirar esse monte de TextFormField
                           TextFormField(
                             onSaved: (value) => foodModel.name = value,
                             keyboardType: TextInputType.text,
@@ -119,11 +120,13 @@ class _InsertFoodState extends State<InsertFood> {
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
+
+                                foodController.create(foodModel);
                               }
                             },
                             textColor: Colors.white,
                             child: Text(
-                              'Enviar',
+                              'Salvar',
                               style: TextStyle(fontSize: 23.0),
                             ),
                           ),
