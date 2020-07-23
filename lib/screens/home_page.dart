@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:nutrients/components/carousel_content.dart';
 import 'package:nutrients/components/food_tracker.dart';
+import 'package:nutrients/screens/insert_food.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -33,6 +34,17 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text('Calculadora de nutrientes'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => InsertFood(),
+              ),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
