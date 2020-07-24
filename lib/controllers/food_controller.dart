@@ -10,32 +10,28 @@ class FoodController {
   FoodController() {
     repository = new FoodRepository();
   }
-  void create(FoodModel model) async {
-    try {
-      repository.createFood(model);
-    } catch (e) {
-      print(e);
-      //TODO : Mostrar ao usuario se está tudo certo ou se aconteceu algum erro
+  dynamic create(FoodModel model) async {
+    String response = await repository.createFood(model);
+    List<FoodModel> allFoods = await readAll();
+    for (var food in allFoods) {
+      print(food.toJson());
     }
+
+    return response;
   }
 
   Future<List<FoodModel>> readAll() async {
-    try {
-      final List<Map<String, dynamic>> maps =
-          await repository.recoverAllFoods();
+    final List<Map<String, dynamic>> maps = await repository.recoverAllFoods();
 
-      return List.generate(maps.length, (i) {
-        return FoodModel(
-          id: maps[i]['id'],
-          name: maps[i]['name'],
-          protein: maps[i]['protein'],
-          carbo: maps[i]['carbo'],
-          fat: maps[i]['fat'],
-        );
-      });
-    } catch (e) {
-      print(e);
-    }
+    return List.generate(maps.length, (i) {
+      return FoodModel(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        protein: maps[i]['protein'],
+        carbo: maps[i]['carbo'],
+        fat: maps[i]['fat'],
+      );
+    });
   }
 
   Future readFood(int id) async {

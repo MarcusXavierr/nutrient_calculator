@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:nutrients/components/round_button.dart';
+import 'package:nutrients/models/Controller.dart';
+
+Controller controller = Controller();
 
 class FoodTracker extends StatelessWidget {
-  FoodTracker({@required this.counter, this.foodName});
+  FoodTracker({
+    @required this.counter,
+    this.foodName,
+    this.carbo,
+    this.fat,
+    this.protein,
+    this.id,
+  });
+
   final int counter;
   final String foodName;
+  final double carbo;
+  final double protein;
+  final double fat;
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -16,22 +31,23 @@ class FoodTracker extends StatelessWidget {
             children: <Widget>[
               RoundIconButton(
                 icon: Icons.add,
-                onPressed: () {},
+                onPressed: () {
+                  print(foodName);
+                  print(fat);
+                  print(protein);
+                  print(carbo);
+                  print(id);
+                  print('________');
+                },
               ),
               SizedBox(width: 7.0),
               RoundIconButton(
                 icon: Icons.remove,
-                onPressed: () {},
+                onPressed: () {
+                  controller.printDogs();
+                },
               ),
               SizedBox(width: 15.0),
-              Text(
-                counter.toString(),
-                style: TextStyle(
-                  color: Colors.blueGrey.shade700,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(width: 10),
             ],
           ),
           Expanded(
@@ -40,6 +56,14 @@ class FoodTracker extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
               ),
+            ),
+          ),
+          SizedBox(width: 10),
+          Text(
+            counter.toString(),
+            style: TextStyle(
+              color: Colors.blueGrey.shade700,
+              fontSize: 20,
             ),
           ),
         ],
