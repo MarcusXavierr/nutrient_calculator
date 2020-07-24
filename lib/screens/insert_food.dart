@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutrients/components/alert_dialog_widget.dart';
 
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/controllers/food_controller.dart';
@@ -54,7 +55,6 @@ class _InsertFoodState extends State<InsertFood> {
                       padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 20.0),
                       child: Column(
                         children: <Widget>[
-                          //TODO: Refatorar o codigo para tirar esse monte de TextFormField
                           TextFormField(
                             onSaved: (value) => foodModel.name = value,
                             keyboardType: TextInputType.text,
@@ -113,15 +113,20 @@ class _InsertFoodState extends State<InsertFood> {
                           ),
                           RaisedButton(
                             color: Theme.of(context).primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                            ),
                             padding: EdgeInsets.symmetric(
                               horizontal: 30.0,
                               vertical: 10.0,
                             ),
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
 
-                                foodController.create(foodModel);
+                                String dialog =
+                                    await foodController.create(foodModel);
+                                return buildAlert(dialog, context).show();
                               }
                             },
                             textColor: Colors.white,
