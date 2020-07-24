@@ -18,15 +18,23 @@ class FoodRepository {
     return database;
   }
 
-  void createFood(FoodModel model) async {
-    final Database db = await open();
-    await db.insert(
-      'foods',
-      model.toMap(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+  dynamic createFood(FoodModel model) async {
+    try {
+      final Database db = await open();
 
-    db.close();
+      await db.insert(
+        'foods',
+        model.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      db.close();
+
+      return "Alimento adicionado com sucesso";
+    } catch (e) {
+      print(e);
+      return "Erro ao adicionar alimento";
+    }
   }
 
   Future<List<Map<String, dynamic>>> recoverAllFoods() async {
