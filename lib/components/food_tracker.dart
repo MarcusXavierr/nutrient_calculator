@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutrients/components/round_button.dart';
 import 'package:nutrients/models/Controller.dart';
+import 'package:nutrients/screens/edit_food_view.dart';
 
 Controller controller = Controller();
 
@@ -50,22 +51,30 @@ class FoodTracker extends StatelessWidget {
               SizedBox(width: 15.0),
             ],
           ),
-          Expanded(
-            child: Text(
-              foodName,
-              style: TextStyle(
-                fontSize: 16,
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => EditFood(),
+              ),
+            ),
+            child: Expanded(
+              child: Text(
+                foodName,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
           SizedBox(width: 10),
-          Text(
-            counter.toString(),
-            style: TextStyle(
-              color: Colors.blueGrey.shade700,
-              fontSize: 20,
-            ),
-          ),
+          // Text(
+          //   counter.toString(),
+          //   style: TextStyle(
+          //     color: Colors.blueGrey.shade700,
+          //     fontSize: 20,
+          //   ),
+          // ),
         ],
       ),
     );
