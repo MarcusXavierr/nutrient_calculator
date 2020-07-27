@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nutrients/components/alert_dialog_widget.dart';
+import 'package:nutrients/components/warning_delete_widget.dart';
 
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/controllers/food_controller.dart';
@@ -7,12 +8,25 @@ import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/controllers/insert_food_controller.dart';
 import 'package:nutrients/models/food_model.dart';
 
-class EditFood extends StatefulWidget {
+class EditFoodView extends StatefulWidget {
+  EditFoodView({
+    this.foodName,
+    this.carbo,
+    this.fat,
+    this.protein,
+    this.id,
+  });
+  final String foodName;
+  final double carbo;
+  final double protein;
+  final double fat;
+  final int id;
+
   @override
-  _EditFoodState createState() => _EditFoodState();
+  _EditFoodViewState createState() => _EditFoodViewState();
 }
 
-class _EditFoodState extends State<EditFood> {
+class _EditFoodViewState extends State<EditFoodView> {
   HomeController homeController = HomeController();
   final FoodController foodController = FoodController();
   final FoodModel foodModel = FoodModel();
@@ -20,8 +34,19 @@ class _EditFoodState extends State<EditFood> {
   final _formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    print(this.widget.foodName);
+    foodModel.carbo = this.widget.carbo;
+    foodModel.id = this.widget.id;
+    foodModel.protein = this.widget.protein;
+    foodModel.name = this.widget.foodName;
+    foodModel.fat = this.widget.fat;
+    print(foodModel.id);
+  }
+
+  @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     homeController.getFoods();
   }
@@ -68,6 +93,7 @@ class _EditFoodState extends State<EditFood> {
                           TextFormField(
                             onSaved: (value) => foodModel.name = value,
                             keyboardType: TextInputType.text,
+                            initialValue: foodModel.name,
                             decoration: InputDecoration(
                               hintText: 'Insira o nome do alimento',
                               labelText: 'Nome',
@@ -85,6 +111,7 @@ class _EditFoodState extends State<EditFood> {
                           TextFormField(
                             onSaved: (value) =>
                                 foodModel.protein = _controller.saver(value),
+                            initialValue: foodModel.protein.toString(),
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               hintText: 'Insira a quantidade de proteína',
@@ -98,6 +125,7 @@ class _EditFoodState extends State<EditFood> {
                           TextFormField(
                             onSaved: (value) =>
                                 foodModel.carbo = _controller.saver(value),
+                            initialValue: foodModel.carbo.toString(),
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               hintText: 'Insira a quantidade de carboidrato',
@@ -111,6 +139,7 @@ class _EditFoodState extends State<EditFood> {
                           TextFormField(
                             onSaved: (value) =>
                                 foodModel.fat = _controller.saver(value),
+                            initialValue: foodModel.fat.toString(),
                             keyboardType: TextInputType.phone,
                             decoration: InputDecoration(
                               hintText: 'Insira a quantidade de gordura',
@@ -121,29 +150,43 @@ class _EditFoodState extends State<EditFood> {
                           SizedBox(
                             height: 40.0,
                           ),
-                          RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30.0,
-                              vertical: 10.0,
-                            ),
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: FormButton(
+                                  text: 'Editar',
+                                  colour: Theme.of(context).primaryColor,
+                                  onPressed: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      _formKey.currentState.save();
 
-                                String dialog =
-                                    await foodController.create(foodModel);
-                                return buildAlert(dialog, context).show();
-                              }
-                            },
-                            textColor: Colors.white,
-                            child: Text(
-                              'Salvar',
-                              style: TextStyle(fontSize: 23.0),
-                            ),
+                                      String dialog = await foodController
+                                          .update(foodModel);
+
+                                      return buildAlert(dialog, context).show();
+                                    }
+                                    return null;
+                                  },
+                                ),
+                              ),
+                              SizedBox(width: 15.0),
+                              Expanded(
+                                child: FormButton(
+                                  onPressed: () {
+                                    return warningDelete(
+                                      context: context,
+                                      deleteLogic: () async {
+                                        foodController.delete(foodModel.id);
+                                        Navigator.pop(context);
+                                        Navigator.pop(context);
+                                      },
+                                    ).show();
+                                  },
+                                  text: 'Apagar',
+                                  colour: Colors.red,
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
@@ -154,6 +197,38 @@ class _EditFoodState extends State<EditFood> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FormButton extends StatelessWidget {
+  const FormButton({
+    @required this.onPressed,
+    @required this.text,
+    @required this.colour,
+  });
+
+  final String text;
+  final Function onPressed;
+  final Color colour;
+
+  @override
+  Widget build(BuildContext context) {
+    return RaisedButton(
+      color: colour,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(18.0),
+      ),
+      padding: EdgeInsets.symmetric(
+        horizontal: 30.0,
+        vertical: 10.0,
+      ),
+      onPressed: this.onPressed,
+      textColor: Colors.white,
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 23.0),
       ),
     );
   }
