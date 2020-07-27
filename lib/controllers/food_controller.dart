@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:nutrients/models/food_model.dart';
 import 'package:nutrients/repositories/food_repository.dart';
 import 'dart:async';
