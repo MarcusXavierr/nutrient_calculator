@@ -57,7 +57,7 @@ class FoodRepository {
     return food;
   }
 
-  Future<bool> updateFood(FoodModel model) async {
+  Future<String> updateFood(FoodModel model) async {
     try {
       final Database db = await open();
 
@@ -70,10 +70,10 @@ class FoodRepository {
 
       db.close();
 
-      return true;
+      return "Alimento atualizado com sucesso";
     } catch (e) {
       print(e);
-      return false;
+      return "Erro ao atualizar alimento";
     }
   }
 

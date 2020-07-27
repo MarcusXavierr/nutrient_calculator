@@ -60,7 +60,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     getFoods();
   }
@@ -121,23 +120,7 @@ class _HomePageState extends State<HomePage> {
                       //TODO: refatorar esse codigo para deixar o menor e mais elegante possivel
                       children: foodTrackerList.length != 0
                           ? foodTrackerList
-                          // ? foods
-                          //     .map<Widget>(
-                          //       (food) => FoodTracker(
-                          //         counter: 1,
-                          //         foodName: food.name,
-                          //         fat: food.fat,
-                          //         carbo: food.carbo,
-                          //         protein: food.protein,
-                          //         id: food.id,
-                          //       ),
-                          //     )
-                          //     .toList()
-                          : <Widget>[
-                              Center(
-                                child: Text('Não tem nada'),
-                              ),
-                            ],
+                          : <Widget>[Container()],
                     ),
                   ),
                 ),
