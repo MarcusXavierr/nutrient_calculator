@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nutrients/components/alert_dialog_widget.dart';
+import 'package:nutrients/components/form_button.dart';
 import 'package:nutrients/components/warning_delete_widget.dart';
 
 import 'package:nutrients/constants.dart';
@@ -66,7 +67,7 @@ class _EditFoodViewState extends State<EditFoodView> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                'Insira um alimento',
+                'Editar Alimento',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 37.0,
@@ -154,7 +155,7 @@ class _EditFoodViewState extends State<EditFoodView> {
                             children: <Widget>[
                               Expanded(
                                 child: FormButton(
-                                  text: 'Editar',
+                                  text: 'Salvar',
                                   colour: Theme.of(context).primaryColor,
                                   onPressed: () async {
                                     if (_formKey.currentState.validate()) {
@@ -197,38 +198,6 @@ class _EditFoodViewState extends State<EditFoodView> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class FormButton extends StatelessWidget {
-  const FormButton({
-    @required this.onPressed,
-    @required this.text,
-    @required this.colour,
-  });
-
-  final String text;
-  final Function onPressed;
-  final Color colour;
-
-  @override
-  Widget build(BuildContext context) {
-    return RaisedButton(
-      color: colour,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18.0),
-      ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 30.0,
-        vertical: 10.0,
-      ),
-      onPressed: this.onPressed,
-      textColor: Colors.white,
-      child: Text(
-        text,
-        style: TextStyle(fontSize: 23.0),
       ),
     );
   }
