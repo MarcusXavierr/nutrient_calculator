@@ -3,6 +3,7 @@ import 'package:nutrients/components/alert_dialog_widget.dart';
 
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/controllers/food_controller.dart';
+import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/controllers/insert_food_controller.dart';
 import 'package:nutrients/models/food_model.dart';
 
@@ -12,10 +13,19 @@ class InsertFood extends StatefulWidget {
 }
 
 class _InsertFoodState extends State<InsertFood> {
+  HomeController homeController = HomeController();
   final FoodController foodController = FoodController();
   final FoodModel foodModel = FoodModel();
   final _controller = InsertFoodController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    homeController.getFoods();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
