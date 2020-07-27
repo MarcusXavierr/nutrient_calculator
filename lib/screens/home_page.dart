@@ -12,9 +12,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<FoodModel> foods;
+  List<FoodModel> foods = [];
   HomeController _controller = HomeController();
-  Future getFoods() async {
+  // void func() async {
+  //   await _controller.getFoods();
+  //   setState(() {});
+  // }
+  Future<void> getFoods() async {
     foods = await _controller.getFoods();
 
     try {
@@ -114,35 +118,25 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       // children:
-                      children: foods != null
-                          ? foods
-                              .map<Widget>(
-                                (food) => FoodTracker(
-                                  counter: 1,
-                                  foodName: food.name,
-                                  fat: food.fat,
-                                  carbo: food.carbo,
-                                  protein: food.protein,
-                                ),
-                              )
-                              .toList()
+                      //TODO: refatorar esse codigo para deixar o menor e mais elegante possivel
+                      children: foodTrackerList.length != 0
+                          ? foodTrackerList
+                          // ? foods
+                          //     .map<Widget>(
+                          //       (food) => FoodTracker(
+                          //         counter: 1,
+                          //         foodName: food.name,
+                          //         fat: food.fat,
+                          //         carbo: food.carbo,
+                          //         protein: food.protein,
+                          //         id: food.id,
+                          //       ),
+                          //     )
+                          //     .toList()
                           : <Widget>[
-                              // FoodTracker(
-                              //   counter: 1,
-                              //   foodName: 'Ovo',
-                              // ),
-                              // FoodTracker(
-                              //   counter: 1,
-                              //   foodName: 'Peito de frango',
-                              // ),
-                              // FoodTracker(
-                              //   counter: 2,
-                              //   foodName: 'Bife de carne bovina',
-                              // ),
-                              // FoodTracker(
-                              //   counter: 4,
-                              //   foodName: 'Colher de sopa de arroz integral',
-                              // ),
+                              Center(
+                                child: Text('Não tem nada'),
+                              ),
                             ],
                     ),
                   ),
