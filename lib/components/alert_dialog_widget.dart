@@ -15,6 +15,7 @@ Alert buildAlert(String dialog, BuildContext context) {
         color: Theme.of(context).primaryColor,
         onPressed: () {
           Navigator.pop(context);
+          Navigator.pop(context);
         },
       )
     ],
