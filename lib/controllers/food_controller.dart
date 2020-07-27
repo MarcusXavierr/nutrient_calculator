@@ -51,7 +51,7 @@ class FoodController {
   }
 
   dynamic update(FoodModel model) async {
-    bool response = await repository.updateFood(model);
+    String response = await repository.updateFood(model);
 
     return response;
   }
