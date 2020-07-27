@@ -51,14 +51,20 @@ class FoodTracker extends StatelessWidget {
               SizedBox(width: 15.0),
             ],
           ),
-          GestureDetector(
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => EditFood(),
+          Expanded(
+            child: GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EditFoodView(
+                    foodName: foodName,
+                    carbo: carbo,
+                    id: id,
+                    protein: protein,
+                    fat: fat,
+                  ),
+                ),
               ),
-            ),
-            child: Expanded(
               child: Text(
                 foodName,
                 style: TextStyle(
