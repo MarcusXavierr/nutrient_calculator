@@ -6,6 +6,7 @@ import 'package:nutrients/controllers/food_controller.dart';
 import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/controllers/insert_food_controller.dart';
 import 'package:nutrients/models/food_model.dart';
+import 'package:nutrients/screens/edit_food_view.dart';
 
 class InsertFood extends StatefulWidget {
   @override
@@ -21,7 +22,6 @@ class _InsertFoodState extends State<InsertFood> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     homeController.getFoods();
   }
@@ -121,15 +121,9 @@ class _InsertFoodState extends State<InsertFood> {
                           SizedBox(
                             height: 40.0,
                           ),
-                          RaisedButton(
-                            color: Theme.of(context).primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 30.0,
-                              vertical: 10.0,
-                            ),
+                          FormButton(
+                            text: 'Salvar',
+                            colour: Theme.of(context).primaryColor,
                             onPressed: () async {
                               if (_formKey.currentState.validate()) {
                                 _formKey.currentState.save();
@@ -138,12 +132,9 @@ class _InsertFoodState extends State<InsertFood> {
                                     await foodController.create(foodModel);
                                 return buildAlert(dialog, context).show();
                               }
+
+                              return null;
                             },
-                            textColor: Colors.white,
-                            child: Text(
-                              'Salvar',
-                              style: TextStyle(fontSize: 23.0),
-                            ),
                           ),
                         ],
                       ),
