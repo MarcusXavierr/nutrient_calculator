@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:nutrients/components/alert_dialog_widget.dart';
-import 'package:nutrients/components/form_button.dart';
-
-import 'package:nutrients/constants.dart';
+import 'package:get_it/get_it.dart';
+import 'package:nutrients/components/form_body_insert_widget.dart';
 import 'package:nutrients/controllers/food_controller.dart';
 import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/controllers/insert_food_controller.dart';
 import 'package:nutrients/models/food_model.dart';
-import 'package:nutrients/screens/edit_food_view.dart';
 
 class InsertFood extends StatefulWidget {
   @override
@@ -15,16 +12,16 @@ class InsertFood extends StatefulWidget {
 }
 
 class _InsertFoodState extends State<InsertFood> {
-  HomeController homeController = HomeController();
+  final homeController = GetIt.I.get<HomeController>();
   final FoodController foodController = FoodController();
   final FoodModel foodModel = FoodModel();
   final _controller = InsertFoodController();
   final _formKey = GlobalKey<FormState>();
 
   @override
-  void dispose() {
+  void dispose() async {
     super.dispose();
-    homeController.getFoods();
+    await homeController.getFoods();
   }
 
   @override
@@ -64,80 +61,11 @@ class _InsertFoodState extends State<InsertFood> {
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 20.0),
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            onSaved: (value) => foodModel.name = value,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              hintText: 'Insira o nome do alimento',
-                              labelText: 'Nome',
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Por favor preencha o campo";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.protein = _controller.saver(value),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de proteína',
-                              labelText: 'Proteína',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.carbo = _controller.saver(value),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de carboidrato',
-                              labelText: 'Carboidrato',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.fat = _controller.saver(value),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de gordura',
-                              labelText: 'Gordura',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: 40.0,
-                          ),
-                          FormButton(
-                            text: 'Salvar',
-                            colour: Theme.of(context).primaryColor,
-                            onPressed: () async {
-                              if (_formKey.currentState.validate()) {
-                                _formKey.currentState.save();
-
-                                String dialog =
-                                    await foodController.create(foodModel);
-                                return buildAlert(dialog, context).show();
-                              }
-
-                              return null;
-                            },
-                          ),
-                        ],
+                      child: FormBodyInsertWidget(
+                        foodModel: foodModel,
+                        controller: _controller,
+                        formKey: _formKey,
+                        foodController: foodController,
                       ),
                     ),
                   ),
