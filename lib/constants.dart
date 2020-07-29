@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 
 final Color kPrimaryColor = Colors.purple.shade900;
@@ -42,3 +43,13 @@ const kTextFieldDecoration = InputDecoration(
 );
 
 const double kSizedBoxHeight = 10;
+
+final CarouselOptions kCarouselSliderOptions = CarouselOptions(
+  disableCenter: false,
+  height: 200,
+  aspectRatio: 2.0,
+  autoPlay: true,
+  autoPlayInterval: Duration(seconds: 3),
+  autoPlayAnimationDuration: Duration(milliseconds: 800),
+  autoPlayCurve: Curves.fastOutSlowIn,
+);
