@@ -1,26 +1,17 @@
 import 'dart:async';
-
 import 'package:nutrients/models/food_model.dart';
-import 'package:path/path.dart';
+import 'package:nutrients/repositories/db_connection.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FoodRepository {
-  Future<Database> open() async {
-    final Future<Database> database = openDatabase(
-      join(await getDatabasesPath(), 'food_database.db'),
-      onCreate: (db, version) {
-        return db.execute(
-            "CREATE TABLE foods (id INTEGER PRIMARY KEY, name TEXT NOT NULL,carbo REAL NOT NULL,protein REAL NOT NULL, fat REAL NOT NULL)"); //I'll not put id now
-      },
-      version: 1,
-    );
-
-    return database;
+  DBConnection conn; //* Connection with database
+  FoodRepository() {
+    conn = DBConnection();
   }
 
   dynamic createFood(FoodModel model) async {
     try {
-      final Database db = await open();
+      final Database db = await conn.open();
 
       await db.insert(
         'foods',
@@ -38,7 +29,7 @@ class FoodRepository {
   }
 
   Future<List<Map<String, dynamic>>> recoverAllFoods() async {
-    final Database db = await open();
+    final Database db = await conn.open();
 
     final List<Map<String, dynamic>> maps = await db.query('foods');
 
@@ -48,7 +39,7 @@ class FoodRepository {
   }
 
   Future<List<Map<String, dynamic>>> recoverFood(int columnId) async {
-    final Database db = await open();
+    final Database db = await conn.open();
 
     final List<Map<String, dynamic>> food =
         await db.rawQuery('SELECT * FROM foods WHERE id = ?', ['$columnId']);
@@ -59,7 +50,7 @@ class FoodRepository {
 
   Future<String> updateFood(FoodModel model) async {
     try {
-      final Database db = await open();
+      final Database db = await conn.open();
 
       await db.update(
         'foods',
@@ -79,7 +70,7 @@ class FoodRepository {
 
   Future<bool> deleteFood(int id) async {
     try {
-      final db = await open();
+      final db = await conn.open();
 
       await db.delete('foods', where: "id = ?", whereArgs: [id]);
 
