@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nutrients/components/alert_dialog_widget.dart';
-import 'package:nutrients/components/form_button.dart';
-import 'package:nutrients/components/warning_delete_widget.dart';
-
-import 'package:nutrients/constants.dart';
+import 'package:get_it/get_it.dart';
+import 'package:nutrients/components/form_body_edit_widget.dart';
 import 'package:nutrients/controllers/food_controller.dart';
 import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/controllers/insert_food_controller.dart';
@@ -28,7 +25,7 @@ class EditFoodView extends StatefulWidget {
 }
 
 class _EditFoodViewState extends State<EditFoodView> {
-  HomeController homeController = HomeController();
+  final homeController = GetIt.I.get<HomeController>();
   final FoodController foodController = FoodController();
   final FoodModel foodModel = FoodModel();
   final _controller = InsertFoodController();
@@ -89,107 +86,11 @@ class _EditFoodViewState extends State<EditFoodView> {
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(20.0, 25.0, 20.0, 20.0),
-                      child: Column(
-                        children: <Widget>[
-                          TextFormField(
-                            onSaved: (value) => foodModel.name = value,
-                            keyboardType: TextInputType.text,
-                            initialValue: foodModel.name,
-                            decoration: InputDecoration(
-                              hintText: 'Insira o nome do alimento',
-                              labelText: 'Nome',
-                            ),
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Por favor preencha o campo";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.protein = _controller.saver(value),
-                            initialValue: foodModel.protein.toString(),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de proteína',
-                              labelText: 'Proteína',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.carbo = _controller.saver(value),
-                            initialValue: foodModel.carbo.toString(),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de carboidrato',
-                              labelText: 'Carboidrato',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: kSizedBoxHeight,
-                          ),
-                          TextFormField(
-                            onSaved: (value) =>
-                                foodModel.fat = _controller.saver(value),
-                            initialValue: foodModel.fat.toString(),
-                            keyboardType: TextInputType.phone,
-                            decoration: InputDecoration(
-                              hintText: 'Insira a quantidade de gordura',
-                              labelText: 'Gordura',
-                            ),
-                            validator: (value) => _controller.validator(value),
-                          ),
-                          SizedBox(
-                            height: 40.0,
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Expanded(
-                                child: FormButton(
-                                  text: 'Salvar',
-                                  colour: Theme.of(context).primaryColor,
-                                  onPressed: () async {
-                                    if (_formKey.currentState.validate()) {
-                                      _formKey.currentState.save();
-
-                                      String dialog = await foodController
-                                          .update(foodModel);
-
-                                      return buildAlert(dialog, context).show();
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                              SizedBox(width: 15.0),
-                              Expanded(
-                                child: FormButton(
-                                  onPressed: () {
-                                    return warningDelete(
-                                      context: context,
-                                      deleteLogic: () async {
-                                        foodController.delete(foodModel.id);
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                      },
-                                    ).show();
-                                  },
-                                  text: 'Apagar',
-                                  colour: Colors.red,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
+                      child: FormBodyEditWidget(
+                        foodModel: foodModel,
+                        controller: _controller,
+                        formKey: _formKey,
+                        foodController: foodController,
                       ),
                     ),
                   ),
