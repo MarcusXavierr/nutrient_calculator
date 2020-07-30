@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nutrients/components/carousel_content.dart';
 import 'package:nutrients/components/food_list_widget.dart';
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/controllers/home_controller.dart';
 import 'package:nutrients/screens/insert_food.dart';
+import 'package:nutrients/view-models/home_food_view_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,28 +16,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = GetIt.I.get<HomeController>();
+
   void func() async {
     await _controller.getFoods();
   }
 
-  List<Widget> cards = [
-    CarouselContent(
-      text: 'Carboidrato',
-      value: 50,
-    ),
-    CarouselContent(
-      value: 28,
-      text: 'Proteína',
-    ),
-    CarouselContent(
-      value: 18,
-      text: 'Gordura',
-    ),
-  ];
+  HomeFoodViewModel viewModel = GetIt.I.get<HomeFoodViewModel>();
+
+  // List<Widget> cards = [
+  //   CarouselContent(
+  //     text: 'Carboidrato',
+  //     value: 0,
+  //   ),
+  //   CarouselContent(
+  //     value: 28,
+  //     text: 'Proteína',
+  //   ),
+  //   CarouselContent(
+  //     value: 18,
+  //     text: 'Gordura',
+  //   ),
+  // ];
 
   @override
   void initState() {
     func();
+    viewModel.setAllValues();
     super.initState();
   }
 
@@ -66,7 +72,32 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: CarouselSlider(
                 options: kCarouselSliderOptions,
-                items: cards,
+                items: [
+                  Observer(
+                    builder: (_) {
+                      return CarouselContent(
+                        text: 'Carboidrato',
+                        value: viewModel.carbo,
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return CarouselContent(
+                        value: viewModel.protein,
+                        text: 'Proteína',
+                      );
+                    },
+                  ),
+                  Observer(
+                    builder: (_) {
+                      return CarouselContent(
+                        value: viewModel.fat,
+                        text: 'Gordura',
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
             Expanded(
