@@ -9,7 +9,7 @@ class DBConnection {
 
     await db.execute('''CREATE TABLE tracker (id INTEGER PRIMARY KEY, 
     food_id INTEGER NOT NULL,food_carbo REAL NOT NULL, 
-    protein REAL NOT NULL, fat REAL NOT NULL)''');
+    food_protein REAL NOT NULL, food_fat REAL NOT NULL,datetime TEXT NOT NULL)''');
   }
 
   Future<Database> open() async {
