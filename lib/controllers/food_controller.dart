@@ -10,10 +10,6 @@ class FoodController {
   }
   dynamic create(FoodModel model) async {
     String response = await repository.createFood(model);
-    List<FoodModel> allFoods = await readAll();
-    for (var food in allFoods) {
-      print(food.toJson());
-    }
 
     return response;
   }
@@ -45,9 +41,7 @@ class FoodController {
           fat: food[i]['fat'],
         );
       });
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   dynamic update(FoodModel model) async {

@@ -30,11 +30,4 @@ class FoodTrackerController {
       );
     });
   }
-
-  void testing() async {
-    List<FoodTrackerModel> trackers = await read();
-    for (var tracker in trackers) {
-      print(tracker.toJson());
-    }
-  }
 }

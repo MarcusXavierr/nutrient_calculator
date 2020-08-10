@@ -19,9 +19,7 @@ class FoodTrackerRepository {
       );
 
       db.close();
-    } catch (e) {
-      print(e);
-    }
+    } catch (e) {}
   }
 
   Future<List<Map<String, dynamic>>> recoverFoodTracker(String datetime) async {

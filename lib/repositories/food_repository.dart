@@ -23,7 +23,6 @@ class FoodRepository {
 
       return "Food successfully added";
     } catch (e) {
-      print(e);
       return "Error adding food";
     }
   }
@@ -63,7 +62,6 @@ class FoodRepository {
 
       return "Food updated successfully";
     } catch (e) {
-      print(e);
       return "Error updating food";
     }
   }
@@ -78,7 +76,6 @@ class FoodRepository {
 
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }

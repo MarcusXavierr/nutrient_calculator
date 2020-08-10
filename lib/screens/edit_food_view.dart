@@ -34,13 +34,11 @@ class _EditFoodViewState extends State<EditFoodView> {
   @override
   void initState() {
     super.initState();
-    print(this.widget.foodName);
     foodModel.carbo = this.widget.carbo;
     foodModel.id = this.widget.id;
     foodModel.protein = this.widget.protein;
     foodModel.name = this.widget.foodName;
     foodModel.fat = this.widget.fat;
-    print(foodModel.id);
   }
 
   @override

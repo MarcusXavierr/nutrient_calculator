@@ -9,7 +9,6 @@ class InsertFoodController {
     try {
       double.parse(value);
     } catch (e) {
-      print(e);
       return "Please enter a valid number";
     }
 
