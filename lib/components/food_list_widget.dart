@@ -12,7 +12,6 @@ class FoodListWidget extends StatelessWidget {
     return Observer(
       builder: (BuildContext context) {
         return Column(
-          //Todo: Quem sabe refatorar essa parte e jogar isso pra uma função ou widget
           children: _controller.foods != null
               ? _controller.foods.length != 0
                   ? _controller.foods

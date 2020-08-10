@@ -37,7 +37,7 @@ class FoodTracker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 12.0),
+      padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
       child: Row(
         children: <Widget>[
           Row(
@@ -57,14 +57,7 @@ class FoodTracker extends StatelessWidget {
                       }).show();
                 },
               ),
-              SizedBox(width: 7.0),
-              RoundIconButton(
-                icon: Icons.remove,
-                onPressed: () {
-                  _controller.testing();
-                },
-              ),
-              SizedBox(width: 15.0),
+              SizedBox(width: 25.0),
             ],
           ),
           FoodNameFieldWidget(
@@ -75,13 +68,6 @@ class FoodTracker extends StatelessWidget {
             fat: fat,
           ),
           SizedBox(width: 10),
-          Text(
-            counter.toString(),
-            style: TextStyle(
-              color: Colors.blueGrey.shade700,
-              fontSize: 20,
-            ),
-          ),
         ],
       ),
     );

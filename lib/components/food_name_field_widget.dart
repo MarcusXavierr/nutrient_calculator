@@ -35,6 +35,7 @@ class FoodNameFieldWidget extends StatelessWidget {
         ),
         child: Text(
           foodName,
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 16,
           ),
