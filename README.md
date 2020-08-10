@@ -1,16 +1,10 @@
-# nutrients
+# Nutrient Calculator
 
-A new Flutter project.
+A simple app to calculate the nutrients of everything you eat
 
-## Getting Started
+### Add a food
+![](gifs/gif-1.gif)
 
-This project is a starting point for a Flutter application.
+### Then press the button to inform the app that you ate that food, or click on the name of the food to edit or delete it
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![](gifs/gif-2.gif)
