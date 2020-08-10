@@ -10,9 +10,9 @@ void main() {
   getIt.registerSingleton<HomeController>(HomeController());
   getIt.registerSingleton<HomeFoodViewModel>(HomeFoodViewModel());
   runApp(MaterialApp(
-    title: 'Calculadora de Nutrientes',
+    title: 'Nutrient Calculator',
     theme: ThemeData(
-      primaryColor: Colors.purple.shade900,
+      primaryColor: Colors.blue.shade800,
       accentColor: Colors.blueGrey.shade700,
     ),
     debugShowCheckedModeBanner: false,

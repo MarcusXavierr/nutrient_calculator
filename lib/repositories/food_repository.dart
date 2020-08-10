@@ -21,10 +21,10 @@ class FoodRepository {
 
       db.close();
 
-      return "Alimento adicionado com sucesso";
+      return "Food successfully added";
     } catch (e) {
       print(e);
-      return "Erro ao adicionar alimento";
+      return "Error adding food";
     }
   }
 
@@ -61,10 +61,10 @@ class FoodRepository {
 
       db.close();
 
-      return "Alimento atualizado com sucesso";
+      return "Food updated successfully";
     } catch (e) {
       print(e);
-      return "Erro ao atualizar alimento";
+      return "Error updating food";
     }
   }
 

@@ -3,14 +3,14 @@ class InsertFoodController {
 
   dynamic validator(String value) {
     if (value.isEmpty) {
-      return "Por favor preencha o campo";
+      return "Please fill in the field";
     }
     value = value.replaceAll(',', '.');
     try {
       double.parse(value);
     } catch (e) {
       print(e);
-      return "Por favor insira um numero válido";
+      return "Please enter a valid number";
     }
 
     return null;

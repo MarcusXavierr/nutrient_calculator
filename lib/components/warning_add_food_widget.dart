@@ -3,13 +3,13 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 Alert warningAddFoodWidget({BuildContext context, Function addLogic}) {
   return Alert(
-    title: 'Mensagem do sistema',
-    desc: 'Você comeu esse alimento?',
+    title: 'System Message',
+    desc: 'Did you eat that food?',
     context: context,
     buttons: [
       DialogButton(
         child: Text(
-          'Sim',
+          'Yes',
           style: TextStyle(color: Colors.white),
         ),
         color: Theme.of(context).primaryColor,
@@ -17,7 +17,7 @@ Alert warningAddFoodWidget({BuildContext context, Function addLogic}) {
       ),
       DialogButton(
         child: Text(
-          'Não',
+          'No',
           style: TextStyle(color: Colors.white),
         ),
         color: Theme.of(context).primaryColor,

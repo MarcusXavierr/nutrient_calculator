@@ -3,13 +3,13 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 
 Alert buildAlert(String dialog, BuildContext context) {
   return Alert(
-    title: 'Mensagem do sistema',
+    title: 'System Message',
     desc: dialog,
     context: context,
     buttons: [
       DialogButton(
         child: Text(
-          'Fechar',
+          'Close',
           style: TextStyle(color: Colors.white),
         ),
         color: Theme.of(context).primaryColor,

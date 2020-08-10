@@ -31,12 +31,12 @@ class FormBodyInsertWidget extends StatelessWidget {
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Insira o nome do alimento',
-            labelText: 'Nome',
+            hintText: 'Enter the name of the food',
+            labelText: 'Name',
           ),
           validator: (value) {
             if (value.isEmpty) {
-              return "Por favor preencha o campo";
+              return "Please fill in the field";
             }
             return null;
           },
@@ -49,8 +49,8 @@ class FormBodyInsertWidget extends StatelessWidget {
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Insira a quantidade de proteína',
-            labelText: 'Proteína',
+            hintText: 'Enter the amount of protein',
+            labelText: 'Protein',
           ),
           validator: (value) => _controller.validator(value),
         ),
@@ -62,8 +62,8 @@ class FormBodyInsertWidget extends StatelessWidget {
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Insira a quantidade de carboidrato',
-            labelText: 'Carboidrato',
+            hintText: 'Enter the amount of carbohydrate',
+            labelText: 'Carbohydrate',
           ),
           validator: (value) => _controller.validator(value),
         ),
@@ -75,8 +75,8 @@ class FormBodyInsertWidget extends StatelessWidget {
           keyboardType: TextInputType.phone,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-            hintText: 'Insira a quantidade de gordura',
-            labelText: 'Gordura',
+            hintText: 'Enter the amount of fat',
+            labelText: 'Fat',
           ),
           validator: (value) => _controller.validator(value),
         ),
@@ -84,7 +84,7 @@ class FormBodyInsertWidget extends StatelessWidget {
           height: 40.0,
         ),
         FormButton(
-          text: 'Salvar',
+          text: 'Save',
           colour: Theme.of(context).primaryColor,
           onPressed: () async {
             if (_formKey.currentState.validate()) {

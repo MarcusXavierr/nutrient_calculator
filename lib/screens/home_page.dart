@@ -23,21 +23,6 @@ class _HomePageState extends State<HomePage> {
 
   HomeFoodViewModel viewModel = GetIt.I.get<HomeFoodViewModel>();
 
-  // List<Widget> cards = [
-  //   CarouselContent(
-  //     text: 'Carboidrato',
-  //     value: 0,
-  //   ),
-  //   CarouselContent(
-  //     value: 28,
-  //     text: 'Proteína',
-  //   ),
-  //   CarouselContent(
-  //     value: 18,
-  //     text: 'Gordura',
-  //   ),
-  // ];
-
   @override
   void initState() {
     func();
@@ -53,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
-        title: Text('Calculadora de nutrientes'),
+        title: Text('Nutrient Calculator'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),
@@ -76,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                   Observer(
                     builder: (_) {
                       return CarouselContent(
-                        text: 'Carboidrato',
+                        text: 'Carbohydrate',
                         value: viewModel.carbo,
                       );
                     },
@@ -85,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (_) {
                       return CarouselContent(
                         value: viewModel.protein,
-                        text: 'Proteína',
+                        text: 'Protein',
                       );
                     },
                   ),
@@ -93,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     builder: (_) {
                       return CarouselContent(
                         value: viewModel.fat,
-                        text: 'Gordura',
+                        text: 'Fat',
                       );
                     },
                   ),

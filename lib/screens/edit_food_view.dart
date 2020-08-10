@@ -56,7 +56,7 @@ class _EditFoodViewState extends State<EditFoodView> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        title: Text('Calculadora de nutrientes'),
+        title: Text('Nutrient Calculator'),
       ),
       body: Container(
         child: Column(
@@ -64,7 +64,7 @@ class _EditFoodViewState extends State<EditFoodView> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                'Editar Alimento',
+                'Edit Food',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 37.0,

@@ -31,7 +31,7 @@ class _InsertFoodState extends State<InsertFood> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        title: Text('Calculadora de nutrientes'),
+        title: Text('Nutrient Calculator'),
       ),
       body: Container(
         child: Column(
@@ -39,7 +39,7 @@ class _InsertFoodState extends State<InsertFood> {
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text(
-                'Insira um alimento',
+                'Insert Food',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 37.0,

@@ -5,7 +5,7 @@ import 'package:nutrients/components/round_button.dart';
 import 'package:nutrients/components/warning_add_food_widget.dart';
 import 'package:nutrients/controllers/food_tracker_controller.dart';
 import 'package:nutrients/models/food_tracker_model.dart';
-import 'package:nutrients/screens/edit_food_view.dart';
+
 import 'package:nutrients/view-models/home_food_view_model.dart';
 
 class FoodTracker extends StatelessWidget {
