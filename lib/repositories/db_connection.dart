@@ -16,7 +16,7 @@ class DBConnection {
     final Future<Database> database = openDatabase(
       join(await getDatabasesPath(), 'food_database.db'),
       onCreate: (db, version) {
-        return _createDatabase(db); //I'll not put id now
+        return _createDatabase(db);
       },
       version: 1,
     );
