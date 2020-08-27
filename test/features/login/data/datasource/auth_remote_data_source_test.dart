@@ -6,7 +6,6 @@ import 'package:mockito/mockito.dart';
 import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/utils/logged_user_data.dart';
 import 'package:nutrients/features/login/data/datasources/auth_remote_data_source.dart';
-import 'package:nutrients/features/login/data/repositories/auth_repository_impl.dart';
 
 final String uid = 'ksksksk';
 
@@ -16,33 +15,11 @@ class MockUserCredential extends Mock implements UserCredential {}
 
 class MockUser extends Mock implements User {}
 
-// ! Mocks of Google sign in
-
-class MockGoogleSignIn extends Mock implements GoogleSignIn {}
-
-class MockGoogleSignInAccount extends Mock implements GoogleSignInAccount {}
-
-class MockGoogleSignInAuthentication extends Mock
-    implements GoogleSignInAuthentication {}
-
-class MockGoogleAuthProvider extends Mock implements GoogleAuthProvider {}
-
-class MockGoogleAuthCredential extends Mock implements GoogleAuthCredential {}
-
-class MockMockei extends Mock implements Mockei {}
-
 void main() {
   AuthRemoteDataSourceImpl dataSource;
   MockFirebaseAuth mockFirebaseAuth;
   MockUserCredential mockUserCredential;
   MockUser mockUser;
-
-  // ! Mocks of Google sign in
-  MockGoogleSignIn mockGoogleSignIn;
-  MockGoogleSignInAuthentication mockGoogleSignInAuthentication;
-  MockGoogleAuthCredential mockGoogleAuthCredential;
-  MockGoogleSignInAccount mockGoogleSignInAccount;
-  MockMockei mockMockei;
 
   setUp(() {
     mockFirebaseAuth = MockFirebaseAuth();
@@ -51,12 +28,6 @@ void main() {
     mockUser = MockUser();
 
     // ! Mocks of Google sign in
-    mockGoogleSignIn = MockGoogleSignIn();
-    mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
-    mockGoogleAuthCredential = MockGoogleAuthCredential();
-    mockGoogleSignInAccount = MockGoogleSignInAccount();
-    mockMockei = MockMockei();
-    //mockGoogleAuthProvider = MockGoogleAuthProvider;
   });
   final String tEmail = 'marcusxavierr123@gmail.com';
   final String tPassword = '123456';
