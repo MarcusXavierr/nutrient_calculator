@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/network/network_info.dart';
 import 'package:nutrients/core/utils/logged_user_data.dart';
@@ -28,6 +29,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return Right(response);
     } on ServerException {
       return Left(ServerFailure());
+    } on FirebaseAuthException {
+      return Left(AuthFailure());
     }
   }
 
