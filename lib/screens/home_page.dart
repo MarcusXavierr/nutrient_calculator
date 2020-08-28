@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -33,23 +34,61 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            DrawerHeader(
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            // * End of header
+            GestureDetector(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => InsertFood(),
+                ),
+              ),
+              child: ListTile(
+                leading: Icon(Icons.add),
+                title: Text('Add food'),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.cloud_upload),
+              title: Text('Synchonize data'),
+            ),
+
+            GestureDetector(
+              onTap: () async {
+                await GetIt.I.get<FirebaseAuth>().signOut();
+              },
+              child: ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('Sign Out'),
+              ),
+            ),
+          ],
+        ),
+      ),
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         title: Text('Nutrient Calculator'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => InsertFood(),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Center(
         child: Column(
