@@ -1,4 +1,4 @@
-package com.example.nutrients
+package com.marcuxavierr.nutrients
 
 import io.flutter.embedding.android.FlutterActivity
 

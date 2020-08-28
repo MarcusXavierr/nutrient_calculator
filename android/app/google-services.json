@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "261805612647",
+    "firebase_url": "https://nutrientcalculator.firebaseio.com",
+    "project_id": "nutrientcalculator",
+    "storage_bucket": "nutrientcalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261805612647:android:6864aded10436fe9e93ec2",
+        "android_client_info": {
+          "package_name": "com.marcusxavierr.nutrients"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261805612647-tubfpkd27atf0u1jj4sq633ss572mfdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.marcusxavierr.nutrients",
+            "certificate_hash": "d5ad70e4ff7d903573954535f2b89f90e89bb2e3"
+          }
+        },
+        {
+          "client_id": "261805612647-h6s9bl0luai5m5u8hj4he8so27a8ca61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0WbOT51i9JhqBNHbFockGInPi0Zkxaa0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261805612647-h6s9bl0luai5m5u8hj4he8so27a8ca61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
