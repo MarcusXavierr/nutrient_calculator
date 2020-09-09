@@ -1,0 +1,20 @@
+{
+    "data": {
+      "food_list": [
+        {
+          "carbo": 10.6,
+          "protein": 10.5,
+          "name": "",
+          "user_id": "seila",
+          "fat": 18
+        },
+        {
+          "carbo": 10.6,
+          "protein": 10.5,
+          "name": "não sei",
+          "user_id": "seila",
+          "fat": 18.9
+        }
+      ]
+    }
+  }

@@ -1,0 +1,13 @@
+{
+    "data": {
+      "food_tracker": [
+        {
+          "user_id": "seila",
+          "food_fat": 8,
+          "food_protein": 10.5,
+          "food_carbo": 15.6,
+          "datetime": "2020-20-12"
+        }
+      ]
+    }
+  }
