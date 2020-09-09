@@ -2,10 +2,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:nutrients/core/utils/success.dart';
-import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_repository.dart';
+import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_data_repository.dart';
 import 'package:nutrients/features/synchronize_data/domain/usecases/upload_food_list_data.dart';
 
-class MockFoodListRepository extends Mock implements FoodListRepository {}
+class MockFoodListRepository extends Mock implements FoodListDataRepository {}
 
 void main() {
   UploadFoodListData usecase;
@@ -16,7 +16,7 @@ void main() {
     usecase = UploadFoodListData(mockFoodListRepository);
   });
 
-  final tSuccesUpload = SuccessUpload('Affected Rows: 1');
+  final tSuccesUpload = SuccessUpload(successMessage: 'Affected Rows: 1');
   final tUserId = 'userId';
   test(
     'should return a Success from Repository',

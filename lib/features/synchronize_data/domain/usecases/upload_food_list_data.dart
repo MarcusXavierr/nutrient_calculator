@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:nutrients/core/error/failure.dart';
 import 'package:nutrients/core/utils/success.dart';
-import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_repository.dart';
+import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_data_repository.dart';
 
 class UploadFoodListData {
-  final FoodListRepository repository;
+  final FoodListDataRepository repository;
 
   UploadFoodListData(this.repository);
 
