@@ -1,3 +1,4 @@
+import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/network/network_info.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/food_list_data_source.dart';
 import 'package:nutrients/features/synchronize_data/domain/entities/food_list_data.dart';
@@ -22,7 +23,14 @@ class FoodListDataRepositoryImpl extends FoodListDataRepository {
   }
 
   @override
-  Future<Either<Failure, Success>> uploadFoodListData(String userId) {
-    networkInfo.isConnected;
+  Future<Either<Failure, Success>> uploadFoodListData(String userId) async {
+    if (!await networkInfo.isConnected) {
+      return Left(NetworkFailure());
+    }
+    try {
+      return Right(await dataSource.uploadData(userId));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
   }
 }

@@ -5,18 +5,15 @@ abstract class Success extends Equatable {
 }
 
 class SuccessUpload implements Success {
-  final _message;
+  final successMessage;
 
-  SuccessUpload(this._message);
+  SuccessUpload({this.successMessage});
   @override
-  // TODO: implement message
-  String get message => _message;
-
-  @override
-  // TODO: implement props
-  List<Object> get props => [_message];
+  String get message => successMessage;
 
   @override
-  // TODO: implement stringify
+  List<Object> get props => [successMessage];
+
+  @override
   bool get stringify => null;
 }
