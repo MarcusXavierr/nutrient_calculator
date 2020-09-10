@@ -1,7 +1,6 @@
 import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/network/network_info.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/food_tracker_data_source.dart';
-import 'package:nutrients/features/synchronize_data/domain/entities/food_list_data.dart';
 import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
@@ -36,6 +35,8 @@ class FoodTrackerDataRepositoryImpl extends FoodListDataRepository {
       return Right(await function());
     } on ServerException {
       return Left(ServerFailure());
+    } on SQLiteException {
+      return Left(SQLiteFailure());
     }
   }
 }

@@ -18,11 +18,11 @@ class FoodListDataModel extends FoodListData {
 
   /// * You should pass json['data']['food_list'] to this function
   FoodListDataModel.fromJson(Map<String, dynamic> json) {
-    carbo = json['carbo'];
-    protein = json['protein'];
+    carbo = json['carbo'].toDouble();
+    protein = json['protein'].toDouble();
     name = json['name'];
     userId = json['user_id'];
-    fat = json['fat'];
+    fat = json['fat'].toDouble();
   }
 
   Map<String, dynamic> toJson() {

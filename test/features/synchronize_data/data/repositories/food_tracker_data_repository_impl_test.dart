@@ -92,4 +92,67 @@ void main() {
       },
     );
   });
+
+//!
+//!
+//!
+//!
+//!
+//! NEW GROUP OF TESTS
+
+  group('downloadFoodListData', () {
+    final tSuccessDownload =
+        SuccessDownload(successMessage: 'Affected Rows: 1');
+    runTestsOnline(() {
+      test(
+        'should check if the device is online',
+        () async {
+          //Act
+          repository.downloadFoodListData(tUserId);
+          //Assert
+          verify(mockNetworkInfo.isConnected);
+        },
+      );
+
+      test(
+        'should return Success from datasource',
+        () async {
+          // Arrange
+          when(mockFoodTrackerDataSource.downloadData(any))
+              .thenAnswer((realInvocation) async => tSuccessDownload);
+          //Act
+          final result = await repository.downloadFoodListData(tUserId);
+          //Assert
+          verify(mockFoodTrackerDataSource.downloadData(tUserId));
+          expect(result, Right(tSuccessDownload));
+        },
+      );
+
+      test(
+        'should return ServerFailure if the call is not successful',
+        () async {
+          // Arrange
+          when(mockFoodTrackerDataSource.downloadData(any))
+              .thenThrow(ServerException());
+          //Act
+          final result = await repository.downloadFoodListData(tUserId);
+          //Assert
+          expect(result, Left(ServerFailure()));
+        },
+      );
+    });
+
+    test(
+      'should return NetworkFailure if device is offline',
+      () async {
+        // Arrange
+        when(mockNetworkInfo.isConnected).thenAnswer((_) async => false);
+        //Act
+        final result = await repository.downloadFoodListData(tUserId);
+        //Assert
+        expect(result, Left(NetworkFailure()));
+        verifyZeroInteractions(mockFoodTrackerDataSource);
+      },
+    );
+  });
 }

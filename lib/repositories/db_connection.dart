@@ -1,3 +1,4 @@
+import 'package:nutrients/constants.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,7 +15,7 @@ class DBConnection {
 
   Future<Database> open() async {
     final Future<Database> database = openDatabase(
-      join(await getDatabasesPath(), 'food_database.db'),
+      join(await getDatabasesPath(), DatabaseName),
       onCreate: (db, version) {
         return _createDatabase(db);
       },
