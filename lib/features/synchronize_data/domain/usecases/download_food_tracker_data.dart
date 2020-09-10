@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:nutrients/core/error/failure.dart';
+import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/features/synchronize_data/domain/entities/food_tracker_data.dart';
 import 'package:nutrients/features/synchronize_data/domain/repositories/food_tracker_data_repository.dart';
 
@@ -8,7 +9,7 @@ class DownloadFoodTrackerData {
 
   DownloadFoodTrackerData(this.repository);
 
-  Future<Either<Failure, FoodTrackerData>> call(String userId) async {
+  Future<Either<Failure, Success>> call(String userId) async {
     return await repository.downloadFoodTrackerData(userId);
   }
 }

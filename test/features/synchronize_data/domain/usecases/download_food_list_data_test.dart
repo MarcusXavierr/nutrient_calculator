@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/features/synchronize_data/domain/entities/food_list_data.dart';
 import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_data_repository.dart';
 import 'package:nutrients/features/synchronize_data/domain/usecases/download_food_list_data.dart';
@@ -16,18 +17,17 @@ void main() {
   });
 
   final tUserId = 'UserId';
-  final tFoodListData = FoodListData(
-      carbo: 12.0, fat: 12.5, protein: 12.9, name: 'seila', userId: tUserId);
+  final tSuccessDownload = SuccessDownload(successMessage: 'Affected Rows: 1');
   test(
     'should return a FoodListData from repository',
     () async {
       // Arrange
       when(mockFoodListRepository.downloadFoodListData(tUserId))
-          .thenAnswer((_) async => Right(tFoodListData));
+          .thenAnswer((_) async => Right(tSuccessDownload));
       //Act
       final result = await usecase.call(tUserId);
       //Assert
-      expect(result, Right(tFoodListData));
+      expect(result, Right(tSuccessDownload));
     },
   );
 }
