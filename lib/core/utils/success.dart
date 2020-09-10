@@ -17,3 +17,20 @@ class SuccessUpload implements Success {
   @override
   bool get stringify => null;
 }
+
+class SuccessDownload implements Success {
+  final String successMessage;
+
+  SuccessDownload({this.successMessage});
+  @override
+  // TODO: implement message
+  String get message => successMessage;
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [successMessage];
+
+  @override
+  // TODO: implement stringify
+  bool get stringify => null;
+}
