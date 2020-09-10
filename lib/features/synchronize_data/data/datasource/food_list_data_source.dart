@@ -10,5 +10,5 @@ abstract class FoodListDataSource {
   ///Calls the https://hasura-on-postgresql.herokuapp.com/v1/graphql endpoint.
   ///
   ///Throws a [ServerException] for all error codes.
-  Future<FoodListDataModel> downloadData(String userId);
+  Future<Success> downloadData(String userId);
 }
