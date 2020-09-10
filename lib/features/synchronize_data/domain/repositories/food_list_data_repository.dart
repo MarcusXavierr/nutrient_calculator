@@ -6,5 +6,5 @@ import 'package:nutrients/features/synchronize_data/domain/entities/food_list_da
 abstract class FoodListDataRepository {
   Future<Either<Failure, Success>> uploadFoodListData(String userId);
 
-  Future<Either<Failure, FoodListData>> downloadFoodListData(String userId);
+  Future<Either<Failure, Success>> downloadFoodListData(String userId);
 }

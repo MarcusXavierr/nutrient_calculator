@@ -6,6 +6,5 @@ import 'package:nutrients/features/synchronize_data/domain/entities/food_tracker
 abstract class FoodTrackerDataRepository {
   Future<Either<Failure, Success>> uploadFoodTrackerData(String userId);
 
-  Future<Either<Failure, FoodTrackerData>> downloadFoodTrackerData(
-      String userId);
+  Future<Either<Failure, Success>> downloadFoodTrackerData(String userId);
 }
