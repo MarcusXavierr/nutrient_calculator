@@ -36,7 +36,7 @@ void main() {
     );
   });
 
-  final tUserId = 'userId';
+  final tUserId = 'Meu Id';
   final tVariables = {"userId": "$tUserId"};
   group('downloadData', () {
     test(
@@ -118,6 +118,120 @@ void main() {
         final call = dataSource.downloadData;
         //Assert
         expect(() => call(tUserId), throwsA(TypeMatcher<EmptyDataException>()));
+      },
+    );
+  });
+
+  //!
+//!
+//!
+//!
+//!
+//!
+//! NEW GROUP OF TESTS
+  group('uploadData', () {
+    final List<Map<String, dynamic>> tMapOfFoods = [
+      {
+        "datetime": "2020-20-12",
+        "food_carbo": 15.6,
+        "food_fat": 8,
+        "food_protein": 10.5,
+        "id": 5
+      },
+      {
+        "datetime": "2020-20-12",
+        "food_carbo": 15.6,
+        "food_fat": 8,
+        "food_protein": 10.5,
+        "id": 1
+      }
+    ];
+
+    _connectWithDbAndReturnList() {
+      when(mockFoodDatabaseConn.openDatabase(DatabaseName))
+          .thenAnswer((_) async {
+        print('Open database ok');
+        return mockDatabase;
+      });
+      when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+          .thenAnswer((_) async {
+        print('query all data ok');
+        return tMapOfFoods;
+      });
+    }
+
+    test(
+      'should get data from database',
+      () async {
+        // Arrange
+        _connectWithDbAndReturnList();
+        //Act
+        dataSource.uploadData(tUserId);
+        //Assert
+      },
+    );
+
+    test(
+      'Should return an SQLiteException if an error occurs when fetching the data',
+      () async {
+        // Arrange
+        when(mockFoodDatabaseConn.openDatabase(DatabaseName))
+            .thenAnswer((realInvocation) async => mockDatabase);
+        when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+            .thenThrow(ServerFailure());
+        //Act
+        final call = dataSource.uploadData;
+        //Assert
+        expect(() => call(tUserId), throwsA(TypeMatcher<SQLiteException>()));
+      },
+    );
+
+    test(
+      'should throw EmptyDataException when data from the local database is null',
+      () async {
+        // Arrange
+        when(mockFoodDatabaseConn.openDatabase(DatabaseName))
+            .thenAnswer((realInvocation) async => mockDatabase);
+        when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+            .thenAnswer((_) async => []);
+        //Act
+        final call = dataSource.uploadData;
+        //Assert
+        expect(() => call(tUserId), throwsA(TypeMatcher<EmptyDataException>()));
+      },
+    );
+
+    test(
+      'should return Success if the call to HasuraConnect is successful',
+      () async {
+        // Arrange
+        _connectWithDbAndReturnList();
+        when(mockHasuraConnect.mutation(KMutationInsertFoodList,
+                variables: anyNamed('variables')))
+            .thenAnswer((_) async =>
+                json.decode(fixture('success_mutation_food_list.json')));
+        //Act
+        final result = await dataSource.uploadData(tUserId);
+        //Assert
+        verify(mockHasuraConnect.mutation(KMutationInsertFoodTracker,
+            variables: anyNamed('variables')));
+        expect(result, isA<SuccessUpload>());
+      },
+    );
+
+    test(
+      'should throw a ServerException if there is a problem with Hasura\'s connection',
+      () async {
+        // Arrange
+        _connectWithDbAndReturnList();
+        when(mockHasuraConnect.mutation(KMutationDeleteFoodTracker,
+                variables: anyNamed('variables')))
+            .thenThrow(ServerFailure());
+
+        //Act
+        final call = dataSource.uploadData;
+        //Assert
+        expect(() => call(tUserId), throwsA(TypeMatcher<ServerException>()));
       },
     );
   });
