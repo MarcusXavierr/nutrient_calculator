@@ -23,14 +23,11 @@ class SuccessDownload implements Success {
 
   SuccessDownload({this.successMessage});
   @override
-  // TODO: implement message
   String get message => successMessage;
 
   @override
-  // TODO: implement props
   List<Object> get props => [successMessage];
 
   @override
-  // TODO: implement stringify
   bool get stringify => null;
 }
