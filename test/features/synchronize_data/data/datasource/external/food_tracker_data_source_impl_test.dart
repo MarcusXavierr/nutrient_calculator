@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:matcher/matcher.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hasura_connect/hasura_connect.dart';
@@ -42,7 +44,7 @@ void main() {
       () async {
         // Arrange
         when(mockHasuraConnect.query(any, variables: {"userId": "$tUserId"}))
-            .thenAnswer((_) async => fixture('food_tracker.json'));
+            .thenAnswer((_) async => json.decode(fixture('food_tracker.json')));
         //Act
         dataSource.downloadData(tUserId);
         //Assert
@@ -69,7 +71,7 @@ void main() {
       () async {
         // Arrange
         when(mockHasuraConnect.query(any, variables: {"userId": "$tUserId"}))
-            .thenAnswer((_) async => fixture('food_tracker.json'));
+            .thenAnswer((_) async => json.decode(fixture('food_tracker.json')));
 
         when(mockFoodDatabaseConn.openDatabase(DatabaseName))
             .thenAnswer((_) async => mockDatabase);
@@ -93,7 +95,7 @@ void main() {
         // Arrange
         when(mockHasuraConnect.query(any, variables: {"userId": "$tUserId"}))
             .thenAnswer(
-          (_) async => fixture('food_tracker.json'),
+          (_) async => json.decode(fixture('food_tracker.json')),
         );
         when(mockFoodDatabaseConn.openDatabase(any))
             .thenAnswer((_) async => mockDatabase);
@@ -110,8 +112,8 @@ void main() {
       'Should throw an EmptyDataException if the data that was taken from the hasura is null ',
       () async {
         // Arrange
-        when(mockHasuraConnect.query(any, variables: tVariables))
-            .thenAnswer((_) async => fixture('food_tracker_empty.json'));
+        when(mockHasuraConnect.query(any, variables: tVariables)).thenAnswer(
+            (_) async => json.decode(fixture('food_tracker_empty.json')));
         //Act
         final call = dataSource.downloadData;
         //Assert
