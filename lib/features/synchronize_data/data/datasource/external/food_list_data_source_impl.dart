@@ -103,7 +103,7 @@ class FoodListDataSourceImpl implements FoodListDataSource {
         await hasuraConnect.mutation(KMutationInsertFoodList,
             variables: food.toJson());
       }
-
+      hasuraConnect.disconnect();
       return SuccessUpload(successMessage: 'Successful cloud sync');
     } catch (e) {
       throw ServerException();
