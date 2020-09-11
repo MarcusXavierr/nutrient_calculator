@@ -39,6 +39,8 @@ class FoodListDataRepositoryImpl extends FoodListDataRepository {
       return Left(ServerFailure());
     } on SQLiteException {
       return Left(SQLiteFailure());
+    } on EmptyDataException catch (e) {
+      return Left(EmptyDataFailure(e.toString()));
     }
   }
 }
