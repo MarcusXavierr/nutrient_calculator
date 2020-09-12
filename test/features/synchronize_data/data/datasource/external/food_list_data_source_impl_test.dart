@@ -11,7 +11,7 @@ import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/error/failure.dart';
 import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/external/food_list_data_source_impl.dart';
-import 'package:nutrients/features/synchronize_data/data/datasource/local_storage/food_list_database_conn.dart';
+import 'package:nutrients/features/synchronize_data/data/datasource/local_storage/food_database_conn.dart';
 import 'package:sqflite/sqflite.dart';
 
 import '../../../../../fixtures/fixture_reader.dart';
@@ -83,7 +83,7 @@ void main() {
           (_) async => json.decode(fixture('food_list.json')),
         );
 
-        when(mockFoodListDatabaseConn.openDatabase(any)).thenAnswer((_) async {
+        when(mockFoodListDatabaseConn.open(any)).thenAnswer((_) async {
           print('entrei no openDatabase');
           return mockDatabase;
         });
@@ -109,7 +109,7 @@ void main() {
             .thenAnswer(
           (_) async => json.decode(fixture('food_list.json')),
         );
-        when(mockFoodListDatabaseConn.openDatabase(any))
+        when(mockFoodListDatabaseConn.open(any))
             .thenAnswer((_) async => mockDatabase);
         when(mockFoodListDatabaseConn.clearDatabase(any))
             .thenThrow(Exception());
@@ -149,8 +149,7 @@ void main() {
     ];
 
     _connectWithDbAndReturnList() {
-      when(mockFoodListDatabaseConn.openDatabase(DatabaseName))
-          .thenAnswer((_) async {
+      when(mockFoodListDatabaseConn.open(DatabaseName)).thenAnswer((_) async {
         print('Open database ok');
         return mockDatabase;
       });
@@ -176,7 +175,7 @@ void main() {
       'should throw EmptyDataException when data from the local database is null',
       () async {
         // Arrange
-        when(mockFoodListDatabaseConn.openDatabase(DatabaseName))
+        when(mockFoodListDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
         when(mockFoodListDatabaseConn.queryAllData(mockDatabase))
             .thenAnswer((_) async => []);
@@ -191,7 +190,7 @@ void main() {
       'Should return an SQLiteException if an error occurs when fetching the data',
       () async {
         // Arrange
-        when(mockFoodListDatabaseConn.openDatabase(DatabaseName))
+        when(mockFoodListDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
         when(mockFoodListDatabaseConn.queryAllData(mockDatabase))
             .thenThrow(ServerFailure());

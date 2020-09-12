@@ -3,7 +3,7 @@ import 'package:nutrients/core/utils/success.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class FoodDatabaseConn {
-  Future<Database> openDatabase(String databaseName);
+  Future<Database> open(String databaseName);
 
   Future<Success> clearDatabase(Database db);
 

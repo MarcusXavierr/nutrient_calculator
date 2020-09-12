@@ -34,4 +34,13 @@ class FoodListDataModel extends FoodListData {
     data['fat'] = this.fat;
     return data;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'protein': protein,
+      'carbo': carbo,
+      'fat': fat,
+    };
+  }
 }

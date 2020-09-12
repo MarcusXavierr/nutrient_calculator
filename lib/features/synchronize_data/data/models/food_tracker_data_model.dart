@@ -19,9 +19,9 @@ class FoodTrackerDataModel extends FoodTrackerData {
   /// * You should pass json['data']['food_tracker'] to this function
   FoodTrackerDataModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
-    foodFat = json['food_fat'];
-    foodProtein = json['food_protein'];
-    foodCarbo = json['food_carbo'];
+    foodFat = json['food_fat'].toDouble();
+    foodProtein = json['food_protein'].toDouble();
+    foodCarbo = json['food_carbo'].toDouble();
     datetime = json['datetime'];
   }
 
@@ -33,5 +33,15 @@ class FoodTrackerDataModel extends FoodTrackerData {
     data['food_carbo'] = this.foodCarbo;
     data['datetime'] = this.datetime;
     return data;
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'food_id': 1,
+      'food_protein': foodProtein,
+      'food_carbo': foodCarbo,
+      'food_fat': foodFat,
+      'datetime': datetime,
+    };
   }
 }

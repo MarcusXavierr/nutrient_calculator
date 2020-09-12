@@ -1,13 +1,10 @@
-import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hasura_connect/hasura_connect.dart';
 import 'package:meta/meta.dart';
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/food_list_data_source.dart';
-import 'package:nutrients/features/synchronize_data/data/datasource/local_storage/food_list_database_conn.dart';
+import 'package:nutrients/features/synchronize_data/data/datasource/local_storage/food_database_conn.dart';
 import 'package:nutrients/features/synchronize_data/data/models/food_list_data_model.dart';
 
 class FoodListDataSourceImpl implements FoodListDataSource {
@@ -62,9 +59,10 @@ class FoodListDataSourceImpl implements FoodListDataSource {
   }
 
   _insertDataIntoDatabase(List<FoodListDataModel> list) async {
-    final db = await foodListTableConn.openDatabase(DatabaseName);
+    final db = await foodListTableConn.open(DatabaseName);
     await foodListTableConn.clearDatabase(db);
     final result = await foodListTableConn.insertNewData(db: db, foods: list);
+    await foodListTableConn.closeDatabase(db);
     return result;
   }
 
@@ -74,9 +72,11 @@ class FoodListDataSourceImpl implements FoodListDataSource {
     listOfFoodListData = [];
     List<Map<String, dynamic>> allFoods;
     try {
-      final db = await foodListTableConn.openDatabase(DatabaseName);
+      final db = await foodListTableConn.open(DatabaseName);
 
       allFoods = await foodListTableConn.queryAllData(db);
+
+      await foodListTableConn.closeDatabase(db);
     } catch (e) {
       throw SQLiteException();
     }
