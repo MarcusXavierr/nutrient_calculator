@@ -33,3 +33,25 @@ class NetworkFailure extends Failure {
   @override
   List<Object> get props => [_message];
 }
+
+class SQLiteFailure extends Failure {
+  final String _message = 'Error in local database';
+
+  @override
+  String get message => _message;
+
+  @override
+  List<Object> get props => [_message];
+}
+
+class EmptyDataFailure extends Failure {
+  final String systemMessage;
+
+  EmptyDataFailure(this.systemMessage);
+
+  @override
+  String get message => systemMessage;
+
+  @override
+  List<Object> get props => [systemMessage];
+}
