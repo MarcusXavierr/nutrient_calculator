@@ -7,12 +7,10 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class FoodListDatabaseConnImpl implements FoodDatabaseConn {
-  final String _tableName = 'foods';
-
   @override
-  Future<Success> clearDatabase(Database db) async {
+  Future<Success> clearDatabase({Database db, String tableName}) async {
     try {
-      await db.delete(_tableName);
+      await db.delete(tableName);
       return SuccessDownload();
     } catch (e) {
       throw SQLiteException();
@@ -29,11 +27,12 @@ class FoodListDatabaseConnImpl implements FoodDatabaseConn {
   }
 
   @override
-  Future<Success> insertNewData({Database db, List foods}) async {
+  Future<Success> insertNewData(
+      {Database db, List foods, String tableName}) async {
     try {
       for (var food in foods) {
         await db.insert(
-          _tableName,
+          tableName,
           food.toMap(),
           conflictAlgorithm: ConflictAlgorithm.replace,
         );
@@ -63,9 +62,10 @@ class FoodListDatabaseConnImpl implements FoodDatabaseConn {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> queryAllData(Database db) async {
+  Future<List<Map<String, dynamic>>> queryAllData(
+      {Database db, String tableName}) async {
     try {
-      List<Map<String, dynamic>> allFoods = await db.query(_tableName);
+      List<Map<String, dynamic>> allFoods = await db.query(tableName);
       return allFoods;
     } catch (e) {
       throw SQLiteException();

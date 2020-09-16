@@ -5,23 +5,24 @@ import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:meta/meta.dart';
-import 'package:nutrients/features/synchronize_data/domain/repositories/food_list_data_repository.dart';
+import 'package:nutrients/features/synchronize_data/domain/repositories/food_tracker_data_repository.dart';
 
 typedef Future<Success> _DownloadOrUpload();
 
-class FoodTrackerDataRepositoryImpl extends FoodListDataRepository {
+class FoodTrackerDataRepositoryImpl extends FoodTrackerDataRepository {
   final NetworkInfo networkInfo;
   final FoodTrackerDataSource dataSource;
 
   FoodTrackerDataRepositoryImpl(
       {@required this.networkInfo, @required this.dataSource});
   @override
-  Future<Either<Failure, Success>> downloadFoodListData(String userId) async {
+  Future<Either<Failure, Success>> downloadFoodTrackerData(
+      String userId) async {
     return await _downloadOrUploadData(() => dataSource.downloadData(userId));
   }
 
   @override
-  Future<Either<Failure, Success>> uploadFoodListData(String userId) async {
+  Future<Either<Failure, Success>> uploadFoodTrackerData(String userId) async {
     return await _downloadOrUploadData(() => dataSource.uploadData(userId));
   }
 
@@ -37,8 +38,8 @@ class FoodTrackerDataRepositoryImpl extends FoodListDataRepository {
       return Left(ServerFailure());
     } on SQLiteException {
       return Left(SQLiteFailure());
-    } on EmptyDataException catch (e) {
-      return Left(EmptyDataFailure(e.toString()));
+    } on EmptyDataException {
+      return Left(EmptyDataFailure('You don\'t have data to synchronize'));
     }
   }
 }

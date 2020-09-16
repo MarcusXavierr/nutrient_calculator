@@ -29,8 +29,8 @@ class AuthRepositoryImpl extends AuthRepository {
       return Right(response);
     } on ServerException {
       return Left(ServerFailure());
-    } on FirebaseAuthException {
-      return Left(AuthFailure());
+    } on FirebaseAuthException catch (e) {
+      return Left(AuthFailure(myMessage: e.message));
     }
   }
 

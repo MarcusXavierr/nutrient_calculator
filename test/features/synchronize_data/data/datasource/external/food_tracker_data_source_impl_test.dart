@@ -79,6 +79,7 @@ void main() {
         when(mockFoodDatabaseConn.insertNewData(
           db: anyNamed('db'),
           foods: anyNamed('foods'),
+          tableName: anyNamed('tableName'),
         )).thenAnswer((_) async => SuccessDownload());
 
         //Act
@@ -100,7 +101,9 @@ void main() {
         when(mockFoodDatabaseConn.open(any))
             .thenAnswer((_) async => mockDatabase);
 
-        when(mockFoodDatabaseConn.clearDatabase(any)).thenThrow(Exception());
+        when(mockFoodDatabaseConn.clearDatabase(
+                db: anyNamed('db'), tableName: anyNamed('tableName')))
+            .thenThrow(Exception());
         //Act
         final call = dataSource.downloadData;
         //Assert
@@ -152,7 +155,8 @@ void main() {
         print('Open database ok');
         return mockDatabase;
       });
-      when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+      when(mockFoodDatabaseConn.queryAllData(
+              db: mockDatabase, tableName: anyNamed('tableName')))
           .thenAnswer((_) async {
         print('query all data ok');
         return tMapOfFoods;
@@ -176,7 +180,8 @@ void main() {
         // Arrange
         when(mockFoodDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
-        when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+        when(mockFoodDatabaseConn.queryAllData(
+                db: mockDatabase, tableName: anyNamed('tableName')))
             .thenThrow(ServerFailure());
         //Act
         final call = dataSource.uploadData;
@@ -191,7 +196,8 @@ void main() {
         // Arrange
         when(mockFoodDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
-        when(mockFoodDatabaseConn.queryAllData(mockDatabase))
+        when(mockFoodDatabaseConn.queryAllData(
+                db: mockDatabase, tableName: anyNamed('tableName')))
             .thenAnswer((_) async => []);
         //Act
         final call = dataSource.uploadData;

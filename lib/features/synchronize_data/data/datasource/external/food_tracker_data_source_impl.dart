@@ -6,11 +6,13 @@ import 'package:nutrients/constants.dart';
 import 'package:nutrients/core/error/exceptions.dart';
 import 'package:nutrients/core/utils/success.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/food_list_data_source.dart';
+import 'package:nutrients/features/synchronize_data/data/datasource/food_tracker_data_source.dart';
 import 'package:nutrients/features/synchronize_data/data/datasource/local_storage/food_database_conn.dart';
 import 'package:nutrients/features/synchronize_data/data/models/food_tracker_data_model.dart';
 import 'package:nutrients/mypass.dart';
 
-class FoodTrackerDataSourceImpl implements FoodListDataSource {
+class FoodTrackerDataSourceImpl implements FoodTrackerDataSource {
+  final String _tableName = 'tracker';
   List<FoodTrackerDataModel> listOfFoodTrackerData = [];
   // HasuraConnect hasuraConnect;
 
@@ -57,8 +59,9 @@ class FoodTrackerDataSourceImpl implements FoodListDataSource {
 
   _insertDataIntoDatabase(List<FoodTrackerDataModel> list) async {
     final db = await foodDatabaseConn.open(DatabaseName);
-    await foodDatabaseConn.clearDatabase(db);
-    final result = await foodDatabaseConn.insertNewData(db: db, foods: list);
+    await foodDatabaseConn.clearDatabase(db: db, tableName: _tableName);
+    final result = await foodDatabaseConn.insertNewData(
+        db: db, foods: list, tableName: _tableName);
     return result;
   }
 
@@ -68,7 +71,8 @@ class FoodTrackerDataSourceImpl implements FoodListDataSource {
     List<Map<String, dynamic>> allFoods;
     try {
       final db = await foodDatabaseConn.open(DatabaseName);
-      allFoods = await foodDatabaseConn.queryAllData(db);
+      allFoods =
+          await foodDatabaseConn.queryAllData(db: db, tableName: _tableName);
     } catch (e) {
       throw SQLiteException();
     }

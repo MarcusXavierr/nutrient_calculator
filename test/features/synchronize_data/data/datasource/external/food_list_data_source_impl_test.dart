@@ -88,7 +88,9 @@ void main() {
           return mockDatabase;
         });
         when(mockFoodListDatabaseConn.insertNewData(
-                db: anyNamed('db'), foods: anyNamed('foods')))
+                db: anyNamed('db'),
+                foods: anyNamed('foods'),
+                tableName: anyNamed('tableName')))
             .thenAnswer((_) async {
           print('entrei no insertNewData');
           return SuccessDownload();
@@ -111,7 +113,8 @@ void main() {
         );
         when(mockFoodListDatabaseConn.open(any))
             .thenAnswer((_) async => mockDatabase);
-        when(mockFoodListDatabaseConn.clearDatabase(any))
+        when(mockFoodListDatabaseConn.clearDatabase(
+                db: anyNamed('db'), tableName: anyNamed('tableName')))
             .thenThrow(Exception());
         //Act
         final call = dataSource.downloadData;
@@ -153,7 +156,8 @@ void main() {
         print('Open database ok');
         return mockDatabase;
       });
-      when(mockFoodListDatabaseConn.queryAllData(mockDatabase))
+      when(mockFoodListDatabaseConn.queryAllData(
+              db: mockDatabase, tableName: anyNamed('tableName')))
           .thenAnswer((_) async {
         print('query all data ok');
         return tMapOfFoods;
@@ -177,7 +181,8 @@ void main() {
         // Arrange
         when(mockFoodListDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
-        when(mockFoodListDatabaseConn.queryAllData(mockDatabase))
+        when(mockFoodListDatabaseConn.queryAllData(
+                db: mockDatabase, tableName: anyNamed('tableName')))
             .thenAnswer((_) async => []);
         //Act
         final call = dataSource.uploadData;
@@ -192,7 +197,8 @@ void main() {
         // Arrange
         when(mockFoodListDatabaseConn.open(DatabaseName))
             .thenAnswer((realInvocation) async => mockDatabase);
-        when(mockFoodListDatabaseConn.queryAllData(mockDatabase))
+        when(mockFoodListDatabaseConn.queryAllData(
+                db: mockDatabase, tableName: anyNamed('tableName')))
             .thenThrow(ServerFailure());
         //Act
         final call = dataSource.uploadData;

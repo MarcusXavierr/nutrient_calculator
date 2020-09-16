@@ -8,6 +8,7 @@ import 'package:nutrients/features/synchronize_data/data/datasource/local_storag
 import 'package:nutrients/features/synchronize_data/data/models/food_list_data_model.dart';
 
 class FoodListDataSourceImpl implements FoodListDataSource {
+  final String _tableName = 'foods';
   final FoodDatabaseConn foodListTableConn;
   final HasuraConnect hasuraConnect;
 
@@ -60,8 +61,9 @@ class FoodListDataSourceImpl implements FoodListDataSource {
 
   _insertDataIntoDatabase(List<FoodListDataModel> list) async {
     final db = await foodListTableConn.open(DatabaseName);
-    await foodListTableConn.clearDatabase(db);
-    final result = await foodListTableConn.insertNewData(db: db, foods: list);
+    await foodListTableConn.clearDatabase(db: db, tableName: _tableName);
+    final result = await foodListTableConn.insertNewData(
+        db: db, foods: list, tableName: _tableName);
     await foodListTableConn.closeDatabase(db);
     return result;
   }
@@ -74,7 +76,8 @@ class FoodListDataSourceImpl implements FoodListDataSource {
     try {
       final db = await foodListTableConn.open(DatabaseName);
 
-      allFoods = await foodListTableConn.queryAllData(db);
+      allFoods =
+          await foodListTableConn.queryAllData(db: db, tableName: _tableName);
 
       await foodListTableConn.closeDatabase(db);
     } catch (e) {

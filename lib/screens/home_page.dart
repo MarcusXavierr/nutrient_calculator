@@ -7,6 +7,7 @@ import 'package:nutrients/components/carousel_content.dart';
 import 'package:nutrients/components/food_list_widget.dart';
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/controllers/home_controller.dart';
+import 'package:nutrients/features/synchronize_data/presentation/pages/sync_main_page.dart';
 import 'package:nutrients/screens/insert_food.dart';
 import 'package:nutrients/view-models/home_food_view_model.dart';
 
@@ -26,9 +27,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    func();
     viewModel.setAllValues();
     super.initState();
+    func();
   }
 
   @override
@@ -66,9 +67,19 @@ class _HomePageState extends State<HomePage> {
                 title: Text('Add food'),
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.cloud_upload),
-              title: Text('Synchonize data'),
+            GestureDetector(
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SyncMainPage(),
+                  ),
+                );
+              },
+              child: ListTile(
+                leading: Icon(Icons.cloud_upload),
+                title: Text('Synchonize data'),
+              ),
             ),
 
             GestureDetector(

@@ -5,6 +5,10 @@ import 'package:nutrients/core/utils/logged_user_data.dart';
 import 'package:meta/meta.dart';
 
 typedef Future<UserCredential> _CreateOrLoginWithEmail();
+enum Functions {
+  createAccount,
+  login,
+}
 
 abstract class AuthRemoteDataSource {
   ///Call the firebase to log in with email and password
@@ -40,13 +44,23 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   AuthRemoteDataSourceImpl({@required this.auth});
 
   Future<LoggedUserData> _authWithEmail(
-      _CreateOrLoginWithEmail createOrLogin) async {
+      _CreateOrLoginWithEmail createOrLogin, Functions type) async {
     try {
       final response = await createOrLogin();
       return LoggedUserData.fromFirebase(response.user);
     } catch (e) {
       if (e.runtimeType == FirebaseAuthException) {
-        throw FirebaseAuthException(message: 'Auth Error');
+        print(e.toString());
+        if (e.toString().contains('too-many-requests')) {
+          throw FirebaseAuthException(
+              message:
+                  ' We have blocked all requests from this device due to unusual activity. Try again later.');
+        }
+        if (0 == type.index) {
+          throw FirebaseAuthException(message: 'This account already exists');
+        } else {
+          throw FirebaseAuthException(message: 'Wrong email or password');
+        }
       } else {
         throw ServerException();
       }
@@ -56,14 +70,19 @@ class AuthRemoteDataSourceImpl extends AuthRemoteDataSource {
   @override
   Future<LoggedUserData> createAccountWithEmail(
       {String email, String password}) async {
-    return await _authWithEmail(() =>
-        auth.createUserWithEmailAndPassword(email: email, password: password));
+    return await _authWithEmail(
+      () =>
+          auth.createUserWithEmailAndPassword(email: email, password: password),
+      Functions.createAccount,
+    );
   }
 
   @override
   Future<LoggedUserData> loginWithEmail({String email, String password}) async {
-    return await _authWithEmail(() =>
-        auth.signInWithEmailAndPassword(email: email, password: password));
+    return await _authWithEmail(
+      () => auth.signInWithEmailAndPassword(email: email, password: password),
+      Functions.login,
+    );
   }
 
   @override
