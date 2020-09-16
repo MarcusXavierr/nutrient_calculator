@@ -44,7 +44,7 @@ abstract class _LoginControllerBase with Store {
   setErrorMessage(String value) => this.errorMessage = value;
 
   authenticateWithEmail() async {
-    print('Entrei no metodo $email e $password');
+    setError(false);
     setIsLoading(true);
     final result = await loginWithEmail.call(
       email: this.email,
@@ -55,9 +55,7 @@ abstract class _LoginControllerBase with Store {
     result.fold((failure) {
       setErrorMessage(failure.message);
       setError(true);
-    }, (loggedUserData) {
-      print('Deu bom');
-    });
+    }, (loggedUserData) {});
   }
 
   authenticaWithGoogle() async {

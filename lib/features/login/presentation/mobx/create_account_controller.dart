@@ -47,6 +47,7 @@ abstract class _CreateAccountControllerBase with Store {
   setErrorMessage(String value) => this.errorMessage = value;
 
   createAccount() async {
+    setError(false);
     setIsLoading(true);
     final response = await createAccountWithEmail.call(
       email: this.email,
@@ -55,8 +56,12 @@ abstract class _CreateAccountControllerBase with Store {
     setIsLoading(false);
     response.fold((failure) {
       setError(true);
+      print(failure.runtimeType);
+      print(failure.message);
       setErrorMessage(failure.message);
-    }, (loggedUserData) {});
+    }, (loggedUserData) {
+      setError(false);
+    });
   }
 
   authenticaWithGoogle() async {
@@ -66,6 +71,8 @@ abstract class _CreateAccountControllerBase with Store {
     result.fold((failure) {
       setError(true);
       setErrorMessage(failure.message);
-    }, (loggedUserData) {});
+    }, (loggedUserData) {
+      setError(false);
+    });
   }
 }

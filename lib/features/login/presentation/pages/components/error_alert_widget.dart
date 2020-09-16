@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nutrients/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-Alert errorAlertWidget(String dialog, BuildContext context) {
+Alert errorAlertWidget(String dialog, BuildContext context, {Color color}) {
   return Alert(
     title: 'System Message',
     desc: dialog,
@@ -12,7 +13,7 @@ Alert errorAlertWidget(String dialog, BuildContext context) {
           'Close',
           style: TextStyle(color: Colors.white),
         ),
-        color: Theme.of(context).primaryColor,
+        color: color == null ? Theme.of(context).primaryColor : color,
         onPressed: () {
           Navigator.pop(context);
         },

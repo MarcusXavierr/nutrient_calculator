@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:nutrients/components/form_button.dart';
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/features/login/presentation/mobx/login_controller.dart';
 import 'package:nutrients/features/login/presentation/pages/components/error_alert_widget.dart';
@@ -78,6 +75,11 @@ class LoginPage extends StatelessWidget {
                                     _formKey.currentState.save();
 
                                     await _controller.authenticateWithEmail();
+                                    // ! Use Asuka to show a snackbar later
+                                    if (!_controller.error) {
+                                      _controller.setError(false);
+                                      return null;
+                                    }
 
                                     if (_controller.error) {
                                       return errorAlertWidget(

@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get_it/get_it.dart';
-import 'package:nutrients/components/form_button.dart';
 import 'package:nutrients/constants.dart';
 import 'package:nutrients/features/login/presentation/mobx/create_account_controller.dart';
 import 'package:nutrients/features/login/presentation/pages/components/error_alert_widget.dart';
-import 'package:nutrients/features/login/presentation/pages/login/login_page.dart';
-import 'package:nutrients/injection_container.dart';
 
 class CreateAccount extends StatelessWidget {
   final _controller = GetIt.I.get<CreateAccountController>();
@@ -77,6 +74,10 @@ class CreateAccount extends StatelessWidget {
                                     _formKey.currentState.save();
 
                                     await _controller.createAccount();
+
+                                    if (!_controller.error) {
+                                      Navigator.pop(context);
+                                    }
 
                                     if (_controller.error) {
                                       return errorAlertWidget(
