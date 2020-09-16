@@ -8,12 +8,15 @@ class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
   final FoodController foodController = FoodController();
-  @observable
-  List<FoodModel> foods;
 
+  @observable
+  List<FoodModel> _foods;
+
+  List<FoodModel> get foods => _foods;
   @action
   Future<void> getFoods() async {
     var allFoods = await foodController.readAll();
-    foods = allFoods;
+    _foods = allFoods;
+    return _foods;
   }
 }

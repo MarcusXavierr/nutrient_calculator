@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:nutrients/features/login/data/datasources/auth_remote_data_source.dart';
-import 'package:nutrients/screens/home_page.dart';
 import 'package:provider/provider.dart';
 import 'core/utils/wrapper.dart';
 import 'injection_container.dart' as di;

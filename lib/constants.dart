@@ -1,7 +1,9 @@
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:flutter/material.dart';
 
-final Color kPrimaryColor = Colors.purple.shade900;
+final Color kPrimaryColor = Colors.blue.shade700;
+
+final Color kErrorColor = Colors.red;
 
 const TextStyle kCarouselValueTextStyle = TextStyle(
   color: Colors.white,

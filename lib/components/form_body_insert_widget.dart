@@ -91,10 +91,10 @@ class FormBodyInsertWidget extends StatelessWidget {
               _formKey.currentState.save();
 
               String dialog = await foodController.create(foodModel);
-              return buildAlert(dialog, context).show();
+              await buildAlert(dialog, context).show();
             }
 
-            return null;
+            Navigator.pop(context);
           },
         ),
       ],

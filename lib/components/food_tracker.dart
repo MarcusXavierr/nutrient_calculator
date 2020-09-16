@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:nutrients/components/food_name_field_widget.dart';
 import 'package:nutrients/components/round_button.dart';
 import 'package:nutrients/components/warning_add_food_widget.dart';
+import 'package:nutrients/controllers/food_controller.dart';
 import 'package:nutrients/controllers/food_tracker_controller.dart';
 import 'package:nutrients/models/food_tracker_model.dart';
 
@@ -57,6 +58,12 @@ class FoodTracker extends StatelessWidget {
                       }).show();
                 },
               ),
+              // RoundIconButton(
+              //   icon: Icons.add,
+              //   onPressed: () {
+              //     FoodController().readAll();
+              //   },
+              // ),
               SizedBox(width: 25.0),
             ],
           ),

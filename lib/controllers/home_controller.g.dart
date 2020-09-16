@@ -9,18 +9,18 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
-  final _$foodsAtom = Atom(name: '_HomeControllerBase.foods');
+  final _$_foodsAtom = Atom(name: '_HomeControllerBase._foods');
 
   @override
-  List<FoodModel> get foods {
-    _$foodsAtom.reportRead();
-    return super.foods;
+  List<FoodModel> get _foods {
+    _$_foodsAtom.reportRead();
+    return super._foods;
   }
 
   @override
-  set foods(List<FoodModel> value) {
-    _$foodsAtom.reportWrite(value, super.foods, () {
-      super.foods = value;
+  set _foods(List<FoodModel> value) {
+    _$_foodsAtom.reportWrite(value, super._foods, () {
+      super._foods = value;
     });
   }
 
@@ -34,7 +34,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   @override
   String toString() {
     return '''
-foods: ${foods}
+
     ''';
   }
 }

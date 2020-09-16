@@ -100,9 +100,9 @@ class FormBodyEditWidget extends StatelessWidget {
 
                     String dialog = await foodController.update(foodModel);
 
-                    return buildAlert(dialog, context).show();
+                    await buildAlert(dialog, context).show();
                   }
-                  return null;
+                  Navigator.pop(context);
                 },
               ),
             ),

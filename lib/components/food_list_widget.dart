@@ -4,7 +4,12 @@ import 'package:get_it/get_it.dart';
 import 'package:nutrients/components/food_tracker.dart';
 import 'package:nutrients/controllers/home_controller.dart';
 
-class FoodListWidget extends StatelessWidget {
+class FoodListWidget extends StatefulWidget {
+  @override
+  _FoodListWidgetState createState() => _FoodListWidgetState();
+}
+
+class _FoodListWidgetState extends State<FoodListWidget> {
   final _controller = GetIt.I.get<HomeController>();
 
   @override

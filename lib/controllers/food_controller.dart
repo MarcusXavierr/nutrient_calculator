@@ -17,6 +17,13 @@ class FoodController {
   Future<List<FoodModel>> readAll() async {
     final List<Map<String, dynamic>> maps = await repository.recoverAllFoods();
 
+    // print('MAPS -------------------------------');
+    // print(maps);
+    // for (Map map in maps) {
+    //   print('MAP--------------------');
+    //   print(map);
+    // }
+
     return List.generate(maps.length, (i) {
       return FoodModel(
         id: maps[i]['id'],

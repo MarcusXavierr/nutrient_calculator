@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 
 abstract class Failure extends Equatable {
   String get message;
@@ -15,12 +16,14 @@ class ServerFailure extends Failure {
 }
 
 class AuthFailure extends Failure {
-  final String _message = 'Wrong email or password';
+  final String myMessage;
+
+  AuthFailure({@required this.myMessage});
   @override
-  String get message => _message;
+  String get message => myMessage;
 
   @override
-  List<Object> get props => [_message];
+  List<Object> get props => [myMessage];
 }
 
 // ! Call if device is offline and need to be online
