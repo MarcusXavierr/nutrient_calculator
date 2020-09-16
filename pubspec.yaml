@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  hasura_connect: ^1.2.2+1
   flutter:
     sdk: flutter
 
@@ -46,6 +47,7 @@ dependencies:
   #provider: ^3.1.0
 
 dev_dependencies:
+  sqflite_common_ffi:
   flutter_test:
     sdk: flutter
   mockito: ^4.1.0
